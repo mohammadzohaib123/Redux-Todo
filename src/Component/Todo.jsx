@@ -11,6 +11,10 @@ import Today from '@material-ui/icons/Today';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Update from '@material-ui/icons/Update';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 const styles = theme => ({
     root: {
@@ -61,7 +65,7 @@ class Todo extends Component
                 <div>
                     <Grid container direction="row" style={{ display: "flex", justifyContent: "space-around" }} >
                         <Grid item xs={12} md={12} >
-                            <Paper  style={{paddingBottom: '20px', marginTop: 25, marginBottom: 100, marginRight: 20, marginLeft: 20}}
+                            <Paper  style={{paddingBottom: '20px', marginTop: 25, marginBottom: 25, marginRight: 20, marginLeft: 20}}
                             className={classes.root} > 
                             <Grid item>
                               <Today style={{marginBottom:-10}} />
@@ -78,13 +82,32 @@ class Todo extends Component
                 </div>
                 {/* <input type="text" onChange={this.inputHandler} value={this.state.taskInput} />
                 <input type="submit" onClick={this.state.buttonHandler} value={this.state.buttonName}/> */}
-                <ul>
+                {/* <ul>
                     {this.props.taskArray.map((value, i) => {
-                        return <li id={value.key} >{value.task}
+                        return <li id={value.key} >{value}
                         <button onClick={()=>this.updateHandler(i)} >update</button> 
                         <button onClick={(e) => this.props.delete(i)} >delete</button></li>
                     })}
-                </ul>
+                </ul> */}
+                <Grid container direction="row" style={{ display: "flex", justifyContent: "space-around" }} >
+                    <Grid item xs={12} md={12} >
+                        <List component="nav">
+                            {this.props.taskArray.map((value, i) => {
+                                 return  <ListItem id={value.key}>
+                                    {value.task}
+                                    <Button variant="contained" color="primary" onClick={()=>this.updateHandler(i)} className={classes.button} style={{ marginLeft: 100, }}>
+                                        UPDATE
+                                        <Update />
+                                    </Button>
+                                    <Button variant="contained" color="secondary" onClick={(e) => this.props.delete(i)} className={classes.button} style={{ marginLeft: 10,  }}>
+                                        DELETE
+                                        <DeleteIcon className={classes.rightIcon} />
+                                    </Button>
+                                </ListItem> })}
+                        </List>
+                    </Grid>
+                </Grid>
+
             </div>
         )
     }
